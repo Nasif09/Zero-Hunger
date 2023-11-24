@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Accept Collect Request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Food has been Collected</h2>
+</div>
+
+<script>
+    setTimeout(function () {
+        window.location.href = '@Url.Action("AssignedCollectRequests", "Employee", new { userId = ViewBag.UserId })';
+    }, 3000);
+</script>

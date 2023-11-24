@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ZeroHunger.EF.CollectRequest>
+
+@{
+    ViewBag.Title = "ViewCollectRequests";
+}
+<h1>Welcome Admin</h1>
+<hr />
+<h3 class="text-center">Collect Requests</h3>
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxPreservationTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxPreservationTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Assign Employee", "Edit", new { id = item.RequestID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("View Details", "Details", new { id = item.RequestID }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>

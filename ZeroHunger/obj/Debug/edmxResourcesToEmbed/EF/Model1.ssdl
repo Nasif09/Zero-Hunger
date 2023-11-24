@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CollectRequests">
+    <Key>
+      <PropertyRef Name="RequestID" />
+    </Key>
+    <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EID" Type="int" Nullable="false" />
+    <Property Name="RID" Type="int" Nullable="false" />
+    <Property Name="RequestTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="MaxPreservationTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DistributionRecords">
+    <Key>
+      <PropertyRef Name="DID" />
+    </Key>
+    <Property Name="DID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RequestID" Type="int" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="EID" />
+    </Key>
+    <Property Name="EID" Type="int" Nullable="false" />
+    <Property Name="EmplayeeName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Zero Hunger.dbo.FoodItems' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FoodItems">
+    <Key>
+      <PropertyRef Name="FID" />
+      <PropertyRef Name="RequestID" />
+      <PropertyRef Name="Item Name" />
+      <PropertyRef Name="Quantity" />
+    </Key>
+    <Property Name="FID" Type="int" Nullable="false" />
+    <Property Name="RequestID" Type="int" Nullable="false" />
+    <Property Name="Item Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Quantity" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Registrations">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Organization" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Restaurents">
+    <Key>
+      <PropertyRef Name="RID" />
+    </Key>
+    <Property Name="RID" Type="int" Nullable="false" />
+    <Property Name="RestaurentName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CollectRequests_Employees">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+    <End Role="CollectRequests" Type="Self.CollectRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EID" />
+      </Principal>
+      <Dependent Role="CollectRequests">
+        <PropertyRef Name="EID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CollectRequests_Restaurents">
+    <End Role="Restaurents" Type="Self.Restaurents" Multiplicity="1" />
+    <End Role="CollectRequests" Type="Self.CollectRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurents">
+        <PropertyRef Name="RID" />
+      </Principal>
+      <Dependent Role="CollectRequests">
+        <PropertyRef Name="RID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DistributionRecords_CollectRequests">
+    <End Role="CollectRequests" Type="Self.CollectRequests" Multiplicity="1" />
+    <End Role="DistributionRecords" Type="Self.DistributionRecords" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CollectRequests">
+        <PropertyRef Name="RequestID" />
+      </Principal>
+      <Dependent Role="DistributionRecords">
+        <PropertyRef Name="RequestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodItems_CollectRequests">
+    <End Role="CollectRequests" Type="Self.CollectRequests" Multiplicity="1" />
+    <End Role="FoodItems" Type="Self.FoodItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CollectRequests">
+        <PropertyRef Name="RequestID" />
+      </Principal>
+      <Dependent Role="FoodItems">
+        <PropertyRef Name="RequestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="CollectRequests" EntityType="Self.CollectRequests" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DistributionRecords" EntityType="Self.DistributionRecords" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Registrations" EntityType="Self.Registrations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Restaurents" EntityType="Self.Restaurents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FoodItems" EntityType="Self.FoodItems" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [FoodItems].[FID] AS [FID], 
+    [FoodItems].[RequestID] AS [RequestID], 
+    [FoodItems].[Item Name] AS [Item Name], 
+    [FoodItems].[Quantity] AS [Quantity]
+    FROM [dbo].[FoodItems] AS [FoodItems]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_CollectRequests_Employees" Association="Self.FK_CollectRequests_Employees">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="CollectRequests" EntitySet="CollectRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CollectRequests_Restaurents" Association="Self.FK_CollectRequests_Restaurents">
+      <End Role="Restaurents" EntitySet="Restaurents" />
+      <End Role="CollectRequests" EntitySet="CollectRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DistributionRecords_CollectRequests" Association="Self.FK_DistributionRecords_CollectRequests">
+      <End Role="CollectRequests" EntitySet="CollectRequests" />
+      <End Role="DistributionRecords" EntitySet="DistributionRecords" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodItems_CollectRequests" Association="Self.FK_FoodItems_CollectRequests">
+      <End Role="CollectRequests" EntitySet="CollectRequests" />
+      <End Role="FoodItems" EntitySet="FoodItems" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ZeroHunger.EF.CollectRequest>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Restaurent</h1>
+<p>
+    @Html.ActionLink("Create New", "OpenCollectRequest", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxPreservationTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxPreservationTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.RequestID }, new { @class = "btn btn-primary" }) 
+            @Html.ActionLink("Details", "Details", new { id=item.RequestID }, new { @class = "btn btn-primary" }) 
+            @Html.ActionLink("Delete", "Delete", new { id = item.RequestID }, new { @class = "btn btn-primary" })
+        </td>
+    </tr>
+}
+
+</table>

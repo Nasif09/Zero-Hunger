@@ -1,0 +1,78 @@
+﻿@model ZeroHunger.EF.CollectRequest
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RequestID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RequestTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxPreservationTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaxPreservationTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <h4>FoodItems</h4>
+    @foreach (var foodItem in Model.FoodItems)
+    {
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => foodItem.FID)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => foodItem.FID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => foodItem.Item_Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => foodItem.Item_Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => foodItem.Quantity)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => foodItem.Quantity)
+                </dd>
+            </dl>
+        </div>
+    }
+</div>

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ZeroHunger.EF.CollectRequest>
+
+@{
+    ViewBag.Title = "AssignedCollectRequests";
+}
+<h1>Employee</h1>
+<hr />
+<h4 class="text-center">Assigned CollectRequest</h4>
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxPreservationTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxPreservationTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Collected", "AcceptCollectRequest", new { id = item.RequestID, employeeId = item.EID }, new {@class = "btn btn-primary"})
+                @Html.ActionLink("Distributed", "DistributedMessage", new { id = item.RequestID, employeeId = item.EID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Details", "Details", new { id = item.RequestID }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>
