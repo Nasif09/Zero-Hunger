@@ -12,26 +12,20 @@ namespace ZeroHunger.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class CollectRequest
+    public partial class Restaurant
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CollectRequest()
+        public Restaurant()
         {
-            this.FoodItems = new HashSet<FoodItem>();
+            this.CollectRequests = new HashSet<CollectRequest>();
         }
     
-        public int RequestID { get; set; }
-        public Nullable<int> EID { get; set; }
         public int RID { get; set; }
-        public System.DateTime RequestDay { get; set; }
-        public System.DateTime MaxPreservationTime { get; set; }
-        public string Status { get; set; }
+        public string RestaurentName { get; set; }
+        public string Location { get; set; }
+        public string Contact { get; set; }
     
-        public virtual Employee Employee { get; set; }
-        public virtual Restaurant Restaurant { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FoodItem> FoodItems { get; set; }
-        public virtual ICollection<Employee> Employees { get; set; }
-        public int? AssignedEmployeeID { get; internal set; }
+        public virtual ICollection<CollectRequest> CollectRequests { get; set; }
     }
 }

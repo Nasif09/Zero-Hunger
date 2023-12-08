@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "/Views/Shared/_Employeenav.cshtml";
 }
 
 <h2>Details</h2>
@@ -24,10 +25,10 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RequestTime)
+            @Html.DisplayNameFor(model => model.RequestDay)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RequestTime)
+            @Html.DisplayFor(model => model.RequestDay)
         </dd>
 
         <dt>

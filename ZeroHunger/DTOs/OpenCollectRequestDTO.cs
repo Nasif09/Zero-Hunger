@@ -9,13 +9,10 @@ namespace ZeroHunger.DTOs
     public class OpenCollectRequestDTO
     {
         public int RequestID { get; set; }
-        public int EID { get; set; }
-        [Required(ErrorMessage = "Insert Your Restaurent ID")]
+        public Nullable<int> EID { get; set; }
         public int RID { get; set; }
-        [Required(ErrorMessage = "Insert RequestTime")]
-        public System.TimeSpan RequestTime { get; set; }
-        [Required(ErrorMessage = "Insert MaxPreservationTime")]
-        public System.TimeSpan MaxPreservationTime { get; set; }
+        public System.DateTime RequestDay { get; set; }
+        public System.DateTime MaxPreservationTime { get; set; }
         public string Status { get; set; }
     }
 }

@@ -1,23 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Zero_HungerEntities3">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Zero_HungerEntities4">
     <EntitySetMapping Name="CollectRequests">
       <EntityTypeMapping TypeName="Model.CollectRequest">
         <MappingFragment StoreEntitySet="CollectRequests">
           <ScalarProperty Name="RequestID" ColumnName="RequestID" />
           <ScalarProperty Name="EID" ColumnName="EID" />
           <ScalarProperty Name="RID" ColumnName="RID" />
-          <ScalarProperty Name="RequestTime" ColumnName="RequestTime" />
+          <ScalarProperty Name="RequestDay" ColumnName="RequestDay" />
           <ScalarProperty Name="MaxPreservationTime" ColumnName="MaxPreservationTime" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DistributionRecords">
-      <EntityTypeMapping TypeName="Model.DistributionRecord">
-        <MappingFragment StoreEntitySet="DistributionRecords">
-          <ScalarProperty Name="DID" ColumnName="DID" />
-          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
           <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -26,8 +17,18 @@
       <EntityTypeMapping TypeName="Model.Employee">
         <MappingFragment StoreEntitySet="Employees">
           <ScalarProperty Name="EID" ColumnName="EID" />
-          <ScalarProperty Name="EmplayeeName" ColumnName="EmplayeeName" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
           <ScalarProperty Name="Contact" ColumnName="Contact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FoodItems">
+      <EntityTypeMapping TypeName="Model.FoodItem">
+        <MappingFragment StoreEntitySet="FoodItem">
+          <ScalarProperty Name="FID" ColumnName="FID" />
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+          <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -44,9 +45,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Restaurents">
-      <EntityTypeMapping TypeName="Model.Restaurent">
-        <MappingFragment StoreEntitySet="Restaurents">
+    <EntitySetMapping Name="Restaurants">
+      <EntityTypeMapping TypeName="Model.Restaurant">
+        <MappingFragment StoreEntitySet="Restaurants">
           <ScalarProperty Name="RID" ColumnName="RID" />
           <ScalarProperty Name="RestaurentName" ColumnName="RestaurentName" />
           <ScalarProperty Name="Location" ColumnName="Location" />
@@ -54,15 +55,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FoodItems">
-      <EntityTypeMapping TypeName="Model.FoodItem">
-        <MappingFragment StoreEntitySet="FoodItems">
-          <ScalarProperty Name="FID" ColumnName="FID" />
-          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
-          <ScalarProperty Name="Item_Name" ColumnName="Item Name" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <AssociationSetMapping Name="RegiMaps" TypeName="Model.RegiMaps" StoreEntitySet="RegiMaps">
+      <EndProperty Name="Employees">
+        <ScalarProperty Name="EID" ColumnName="EId" />
+      </EndProperty>
+      <EndProperty Name="Registrations">
+        <ScalarProperty Name="UserId" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

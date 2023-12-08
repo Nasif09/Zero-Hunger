@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "ViewCollectRequests";
+    Layout = "/Views/Shared/_NGOnav.cshtml";
 }
 <h1>Welcome Admin</h1>
 <hr />
@@ -16,7 +17,7 @@
             @Html.DisplayNameFor(model => model.RID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RequestTime)
+            @Html.DisplayNameFor(model => model.RequestDay)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MaxPreservationTime)
@@ -37,7 +38,7 @@
                 @Html.DisplayFor(modelItem => item.RID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RequestTime)
+                @Html.DisplayFor(modelItem => item.RequestDay)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MaxPreservationTime)
@@ -46,7 +47,7 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.ActionLink("Assign Employee", "Edit", new { id = item.RequestID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Assign Employee", "AssignEmployee", new { id = item.RequestID }, new { @class = "btn btn-primary" })
                 @Html.ActionLink("View Details", "Details", new { id = item.RequestID }, new { @class = "btn btn-primary" })
             </td>
         </tr>

@@ -18,13 +18,16 @@ namespace ZeroHunger.EF
         public Employee()
         {
             this.CollectRequests = new HashSet<CollectRequest>();
+            this.Registrations = new HashSet<Registration>();
         }
     
         public int EID { get; set; }
-        public string EmplayeeName { get; set; }
+        public string EmployeeName { get; set; }
         public string Contact { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CollectRequest> CollectRequests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Registration> Registrations { get; set; }
     }
 }

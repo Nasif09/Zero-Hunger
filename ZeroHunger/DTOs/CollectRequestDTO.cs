@@ -9,11 +9,10 @@ namespace ZeroHunger.DTOs
     public class CollectRequestDTO
     {
         public int RequestID { get; set; }
-        public int EID { get; set; }
+        public Nullable<int> EID { get; set; }
         public int RID { get; set; }
-        public System.TimeSpan RequestTime { get; set; }
-        public System.TimeSpan MaxPreservationTime { get; set; }
-        [RegularExpression("^(Requested|Accepted|Collected|Distributed)$", ErrorMessage = "Invalid status value.")]
+        public System.DateTime RequestDay { get; set; }
+        public System.DateTime MaxPreservationTime { get; set; }
         public string Status { get; set; }
 
     }

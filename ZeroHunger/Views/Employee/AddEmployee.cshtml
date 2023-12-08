@@ -1,17 +1,17 @@
 ﻿@model ZeroHunger.EF.Registration
 
 @{
-    ViewBag.Title = "Signup";
+    ViewBag.Title = "AddEmployee";
+    Layout = "/Views/Shared/_Employeenav.cshtml";
 }
 
-<h2>Signup</h2>
+<h2>AddEmployee</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Registration</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

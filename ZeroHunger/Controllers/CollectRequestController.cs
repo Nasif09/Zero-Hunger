@@ -12,11 +12,11 @@ namespace ZeroHunger.Controllers
 {
     public class CollectRequestController : Controller
     {
-        private readonly Zero_HungerEntities3 DB; 
+        private readonly Zero_HungerEntities4 DB; 
 
         public CollectRequestController()
         {
-            DB = new Zero_HungerEntities3();
+            DB = new Zero_HungerEntities4();
         }
 
         public ActionResult Index()

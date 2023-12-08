@@ -14,6 +14,12 @@ namespace ZeroHunger.EF
     
     public partial class Registration
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Registration()
+        {
+            this.Employees = new HashSet<Employee>();
+        }
+    
         public int UserId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -21,5 +27,8 @@ namespace ZeroHunger.EF
         public string Contact { get; set; }
         public string Organization { get; set; }
         public string Address { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

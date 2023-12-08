@@ -13,10 +13,10 @@ namespace ZeroHunger.EF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Zero_HungerEntities3 : DbContext
+    public partial class Zero_HungerEntities4 : DbContext
     {
-        public Zero_HungerEntities3()
-            : base("name=Zero_HungerEntities3")
+        public Zero_HungerEntities4()
+            : base("name=Zero_HungerEntities4")
         {
         }
     
@@ -26,10 +26,9 @@ namespace ZeroHunger.EF
         }
     
         public virtual DbSet<CollectRequest> CollectRequests { get; set; }
-        public virtual DbSet<DistributionRecord> DistributionRecords { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Registration> Registrations { get; set; }
-        public virtual DbSet<Restaurent> Restaurents { get; set; }
         public virtual DbSet<FoodItem> FoodItems { get; set; }
+        public virtual DbSet<Registration> Registrations { get; set; }
+        public virtual DbSet<Restaurant> Restaurants { get; set; }
     }
 }

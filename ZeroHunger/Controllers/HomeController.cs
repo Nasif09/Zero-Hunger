@@ -12,7 +12,7 @@ namespace ZeroHunger.Controllers
 {
     public class HomeController : Controller
     {
-        private Zero_HungerEntities3 db = new Zero_HungerEntities3(); 
+        private Zero_HungerEntities4 db = new Zero_HungerEntities4(); 
 
         public ActionResult Index()
         {
@@ -54,17 +54,14 @@ namespace ZeroHunger.Controllers
                     return RedirectToAction("ViewCollectRequests", "NGO");
                 }
             }
-        return View(login);
+            return View(login);
         }
-
-
 
         [HttpGet]
         public ActionResult Signup()
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult Signup(Registration signup)
         {
@@ -83,10 +80,24 @@ namespace ZeroHunger.Controllers
                 db.Registrations.Add(user);
                 db.SaveChanges();
 
+                if (signup.Role == "Employee")
+                {
+                    Employee employee = new Employee()
+                    {
+                        EmployeeName = signup.Username,
+                        Contact = signup.Contact
+                    };
+
+                    db.Employees.Add(employee);
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Login");
             }
+
             return View(signup);
         }
+
 
         public ActionResult Logout()
         {

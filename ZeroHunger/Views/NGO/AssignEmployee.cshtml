@@ -1,0 +1,24 @@
+﻿@model ZeroHunger.DTOs.AssignEmployeeDTO
+
+@{
+    ViewBag.Title = "Assign Employee";
+}
+
+<h2>Assign Employee</h2>
+<hr />
+<h3>Collect Request ID: @Model.CollectRequestID</h3>
+
+@using (Html.BeginForm())
+{
+    <h3>Available Employees</h3>
+    @for (int i = 0; i < Model.Employees.Count; i++)
+    {
+        <div>
+            @Html.CheckBoxFor(model => model.Employees[i].IsAssigned)
+            @Html.HiddenFor(model => model.Employees[i].EID)
+            @Html.LabelFor(model => model.Employees[i].IsAssigned, Model.Employees[i].EmployeeName)
+        </div>
+    }
+
+    <input type="submit" value="Assign Employee" class="btn btn-primary" />
+}

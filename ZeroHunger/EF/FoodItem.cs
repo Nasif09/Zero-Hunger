@@ -17,7 +17,7 @@ namespace ZeroHunger.EF
         public int FID { get; set; }
         public int RequestID { get; set; }
         public string Item_Name { get; set; }
-        public decimal Quantity { get; set; }
+        public int Quantity { get; set; }
     
         public virtual CollectRequest CollectRequest { get; set; }
     }

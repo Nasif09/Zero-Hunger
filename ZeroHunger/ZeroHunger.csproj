@@ -135,13 +135,13 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NGOController.cs" />
+    <Compile Include="DTOs\AssignEmployeeDTO.cs" />
     <Compile Include="DTOs\CollectRequestDTO.cs" />
+    <Compile Include="DTOs\EmployeeDTO.cs" />
     <Compile Include="DTOs\LoginDTO.cs" />
     <Compile Include="DTOs\OpenCollectRequestDTO.cs" />
+    <Compile Include="DTOs\RestaurantDTO.cs" />
     <Compile Include="EF\CollectRequest.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\DistributionRecord.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Employee.cs">
@@ -168,7 +168,7 @@
     <Compile Include="EF\Registration.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\Restaurent.cs">
+    <Compile Include="EF\Restaurant.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -244,18 +244,25 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Signup.cshtml" />
     <Content Include="Views\CollectRequest\Index.cshtml" />
     <Content Include="Views\Employee\AssignedCollectRequests.cshtml" />
     <Content Include="Views\Employee\AcceptCollectRequest.cshtml" />
     <Content Include="Views\CollectRequest\Edit.cshtml" />
     <Content Include="Views\Employee\Details.cshtml" />
     <Content Include="Views\CollectRequest\Details.cshtml" />
-    <Content Include="Views\NGO\Details.cshtml" />
     <Content Include="Views\Employee\DistributedMessage.cshtml" />
     <Content Include="Views\NGO\ViewCollectRequests.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\CollectRequest\OpenCollectRequest.cshtml" />
+    <Content Include="Views\Home\Signup.cshtml" />
+    <Content Include="Views\NGO\Edit.cshtml" />
+    <Content Include="Views\NGO\AssignEmployee.cshtml" />
+    <Content Include="Views\Shared\_NGOnav.cshtml" />
+    <Content Include="Views\NGO\Logout.cshtml" />
+    <Content Include="Views\NGO\ViewRestaurants.cshtml" />
+    <Content Include="Views\Employee\ViewEmployees.cshtml" />
+    <Content Include="Views\Employee\AddEmployee.cshtml" />
+    <Content Include="Views\Shared\_Employeenav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

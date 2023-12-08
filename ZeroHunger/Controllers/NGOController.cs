@@ -12,11 +12,11 @@ namespace ZeroHunger.Controllers
 {
     public class NGOController : Controller
     {
-        private readonly Zero_HungerEntities3 DB;
+        private readonly Zero_HungerEntities4 DB;
 
         public NGOController()
         {
-            DB = new Zero_HungerEntities3();
+            DB = new Zero_HungerEntities4();
         }
         public ActionResult ViewCollectRequests()
         {
@@ -46,6 +46,56 @@ namespace ZeroHunger.Controllers
 
             return View(collectRequest);
         }
+        public ActionResult AssignEmployee(int id)
+        {
+            // Retrieve the collect request based on the provided id
+            var collectRequest = DB.CollectRequests.Find(id);
+
+            if (collectRequest == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Retrieve the list of all employees
+            var employees = DB.Employees.Select(e => new EmployeeDTO
+            {
+                EID = e.EID,
+                EmployeeName = e.EmployeeName
+                // Add other properties as needed
+            }).ToList();
+
+            // Create an AssignEmployeeDTO to pass both the collect request and the list of employees to the view
+            var assignEmployeeDTO = new AssignEmployeeDTO
+            {
+                CollectRequestID = collectRequest.RequestID,
+                AssignedEmployeeID = collectRequest.AssignedEmployeeID,
+                Employees = employees
+            };
+
+            return View(assignEmployeeDTO);
+        }
+
+        [HttpPost]
+        public ActionResult AssignEmployee(AssignEmployeeDTO assignEmployeeDTO)
+        {
+            // Retrieve the collect request based on the provided id
+            var collectRequest = DB.CollectRequests.Find(assignEmployeeDTO.CollectRequestID);
+
+            if (collectRequest == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Update the assigned employee ID in the collect request
+            collectRequest.AssignedEmployeeID = assignEmployeeDTO.AssignedEmployeeID;
+
+            // Save changes to the database
+            DB.SaveChanges();
+
+            // Redirect to the ViewCollectRequests action or another appropriate action
+            return RedirectToAction("ViewCollectRequests");
+        }
+
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -77,6 +127,23 @@ namespace ZeroHunger.Controllers
             DB.Entry(data).State = EntityState.Modified;
             DB.SaveChanges();
             return RedirectToAction("ViewCollectRequests"); 
+        }
+
+        [HttpGet]
+        public ActionResult ViewRestaurants()
+        {
+            var restaurants = DB.Restaurants.ToList();
+
+            var config = new MapperConfiguration(cfg => { cfg.CreateMap<Restaurant, RestaurantDTO>(); });
+            var mapper = new Mapper(config);
+            var restaurantsDTO = restaurants.Select(r => mapper.Map<RestaurantDTO>(r)).ToList();
+
+            return View(restaurantsDTO);
+        }
+        public ActionResult Logout()
+        {
+            Session["user"] = null;
+            return RedirectToAction("Login", "Home");
         }
 
         protected override void Dispose(bool disposing)

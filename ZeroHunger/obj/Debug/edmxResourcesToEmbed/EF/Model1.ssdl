@@ -5,41 +5,38 @@
       <PropertyRef Name="RequestID" />
     </Key>
     <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="EID" Type="int" Nullable="false" />
+    <Property Name="EID" Type="int" />
     <Property Name="RID" Type="int" Nullable="false" />
-    <Property Name="RequestTime" Type="time" Precision="7" Nullable="false" />
-    <Property Name="MaxPreservationTime" Type="time" Precision="7" Nullable="false" />
-    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
-  </EntityType>
-  <EntityType Name="DistributionRecords">
-    <Key>
-      <PropertyRef Name="DID" />
-    </Key>
-    <Property Name="DID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RequestID" Type="int" Nullable="false" />
+    <Property Name="RequestDay" Type="datetime" Nullable="false" />
+    <Property Name="MaxPreservationTime" Type="datetime" Nullable="false" />
     <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Employees">
     <Key>
       <PropertyRef Name="EID" />
     </Key>
-    <Property Name="EID" Type="int" Nullable="false" />
-    <Property Name="EmplayeeName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Contact" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Zero Hunger.dbo.FoodItems' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="FoodItems">
+  <EntityType Name="FoodItem">
     <Key>
       <PropertyRef Name="FID" />
-      <PropertyRef Name="RequestID" />
-      <PropertyRef Name="Item Name" />
-      <PropertyRef Name="Quantity" />
     </Key>
     <Property Name="FID" Type="int" Nullable="false" />
     <Property Name="RequestID" Type="int" Nullable="false" />
-    <Property Name="Item Name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Quantity" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Item_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Quantity" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Zero Hunger.dbo.RegiMaps' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RegiMaps">
+    <Key>
+      <PropertyRef Name="EId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="EId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Registrations">
     <Key>
@@ -49,21 +46,21 @@ warning 6002: The table/view 'Zero Hunger.dbo.FoodItems' does not have a primary
     <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Contact" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" />
     <Property Name="Organization" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="Restaurents">
+  <EntityType Name="Restaurants">
     <Key>
       <PropertyRef Name="RID" />
     </Key>
-    <Property Name="RID" Type="int" Nullable="false" />
+    <Property Name="RID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RestaurentName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Contact" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <Association Name="FK_CollectRequests_Employees">
-    <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
     <End Role="CollectRequests" Type="Self.CollectRequests" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Employees">
@@ -74,11 +71,11 @@ warning 6002: The table/view 'Zero Hunger.dbo.FoodItems' does not have a primary
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CollectRequests_Restaurents">
-    <End Role="Restaurents" Type="Self.Restaurents" Multiplicity="1" />
+  <Association Name="FK_CollectRequests_Restaurants">
+    <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="1" />
     <End Role="CollectRequests" Type="Self.CollectRequests" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Restaurents">
+      <Principal Role="Restaurants">
         <PropertyRef Name="RID" />
       </Principal>
       <Dependent Role="CollectRequests">
@@ -86,59 +83,73 @@ warning 6002: The table/view 'Zero Hunger.dbo.FoodItems' does not have a primary
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DistributionRecords_CollectRequests">
+  <Association Name="FK_FoodItem_CollectRequests">
     <End Role="CollectRequests" Type="Self.CollectRequests" Multiplicity="1" />
-    <End Role="DistributionRecords" Type="Self.DistributionRecords" Multiplicity="*" />
+    <End Role="FoodItem" Type="Self.FoodItem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CollectRequests">
         <PropertyRef Name="RequestID" />
       </Principal>
-      <Dependent Role="DistributionRecords">
+      <Dependent Role="FoodItem">
         <PropertyRef Name="RequestID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_FoodItems_CollectRequests">
-    <End Role="CollectRequests" Type="Self.CollectRequests" Multiplicity="1" />
-    <End Role="FoodItems" Type="Self.FoodItems" Multiplicity="*" />
+  <Association Name="FK_RegiMaps_Employees">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+    <End Role="RegiMaps" Type="Self.RegiMaps" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CollectRequests">
-        <PropertyRef Name="RequestID" />
+      <Principal Role="Employees">
+        <PropertyRef Name="EID" />
       </Principal>
-      <Dependent Role="FoodItems">
-        <PropertyRef Name="RequestID" />
+      <Dependent Role="RegiMaps">
+        <PropertyRef Name="EId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RegiMaps_Registrations">
+    <End Role="Registrations" Type="Self.Registrations" Multiplicity="1" />
+    <End Role="RegiMaps" Type="Self.RegiMaps" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Registrations">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="RegiMaps">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="CollectRequests" EntityType="Self.CollectRequests" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DistributionRecords" EntityType="Self.DistributionRecords" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FoodItem" EntityType="Self.FoodItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Registrations" EntityType="Self.Registrations" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Restaurents" EntityType="Self.Restaurents" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="FoodItems" EntityType="Self.FoodItems" store:Type="Tables" store:Schema="dbo">
+    <EntitySet Name="Restaurants" EntityType="Self.Restaurants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RegiMaps" EntityType="Self.RegiMaps" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [FoodItems].[FID] AS [FID], 
-    [FoodItems].[RequestID] AS [RequestID], 
-    [FoodItems].[Item Name] AS [Item Name], 
-    [FoodItems].[Quantity] AS [Quantity]
-    FROM [dbo].[FoodItems] AS [FoodItems]</DefiningQuery>
+    [RegiMaps].[EId] AS [EId], 
+    [RegiMaps].[UserId] AS [UserId]
+    FROM [dbo].[RegiMaps] AS [RegiMaps]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_CollectRequests_Employees" Association="Self.FK_CollectRequests_Employees">
       <End Role="Employees" EntitySet="Employees" />
       <End Role="CollectRequests" EntitySet="CollectRequests" />
     </AssociationSet>
-    <AssociationSet Name="FK_CollectRequests_Restaurents" Association="Self.FK_CollectRequests_Restaurents">
-      <End Role="Restaurents" EntitySet="Restaurents" />
+    <AssociationSet Name="FK_CollectRequests_Restaurants" Association="Self.FK_CollectRequests_Restaurants">
+      <End Role="Restaurants" EntitySet="Restaurants" />
       <End Role="CollectRequests" EntitySet="CollectRequests" />
     </AssociationSet>
-    <AssociationSet Name="FK_DistributionRecords_CollectRequests" Association="Self.FK_DistributionRecords_CollectRequests">
+    <AssociationSet Name="FK_FoodItem_CollectRequests" Association="Self.FK_FoodItem_CollectRequests">
       <End Role="CollectRequests" EntitySet="CollectRequests" />
-      <End Role="DistributionRecords" EntitySet="DistributionRecords" />
+      <End Role="FoodItem" EntitySet="FoodItem" />
     </AssociationSet>
-    <AssociationSet Name="FK_FoodItems_CollectRequests" Association="Self.FK_FoodItems_CollectRequests">
-      <End Role="CollectRequests" EntitySet="CollectRequests" />
-      <End Role="FoodItems" EntitySet="FoodItems" />
+    <AssociationSet Name="FK_RegiMaps_Employees" Association="Self.FK_RegiMaps_Employees">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="RegiMaps" EntitySet="RegiMaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RegiMaps_Registrations" Association="Self.FK_RegiMaps_Registrations">
+      <End Role="Registrations" EntitySet="Registrations" />
+      <End Role="RegiMaps" EntitySet="RegiMaps" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

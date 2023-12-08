@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("Zero_Hunger", "ViewCollectRequests", "NGO", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item">@Html.ActionLink("Logout", "Logout", "NGO", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Navigation -->
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white bg-primary" data-bs-toggle="collapse" href="#restaurantsSubMenu" role="button" aria-expanded="false" aria-controls="restaurantsSubMenu">
+                                Restaurants
+                            </a>
+                            <div class="collapse" id="restaurantsSubMenu">
+                                <ul class="nav flex-column ml-3">
+                                    <li class="nav-item">
+                                        @Html.ActionLink("All Restaurants", "ViewRestaurants", "NGO", new { area = "" }, new { @class = "nav-link text-info" })
+                                    </li>
+                                    <li class="nav-item">
+                                        @Html.ActionLink("Add Restaurant", "AddRestaurant", "NGO", new { area = "" }, new { @class = "nav-link text-info" })
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white bg-primary" data-bs-toggle="collapse" href="#employeeSubMenu" role="button" aria-expanded="false" aria-controls="employeeSubMenu">
+                                Employee
+                            </a>
+                            <div class="collapse" id="employeeSubMenu">
+                                <ul class="nav flex-column ml-3">
+                                    <li class="nav-item">
+                                        @Html.ActionLink("All Employee", "ViewEmployees", "Employee", new { area = "" }, new { @class = "nav-link text-info" })
+                                    </li>
+                                    <li class="nav-item">
+                                        @Html.ActionLink("Add Employee", "AddEmployee", "Employee", new { area = "" }, new { @class = "nav-link text-info" })
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+</body>
+</html>
